@@ -1,4 +1,4 @@
-package com.denisanfossi.mareu.model;
+package com.denisanfossi.mareu.data.model;
 
 import java.util.Date;
 import java.util.Set;

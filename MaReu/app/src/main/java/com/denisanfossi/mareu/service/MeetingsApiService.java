@@ -1,11 +1,11 @@
 package com.denisanfossi.mareu.service;
 
-import com.denisanfossi.mareu.model.Meeting;
+import com.denisanfossi.mareu.data.model.Meeting;
 
 import java.util.List;
 
 /**
- * Meetings API Service Interface
+ * MeetingsContract API Service Interface
  */
 public interface MeetingsApiService {
 

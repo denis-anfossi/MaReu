@@ -1,13 +1,13 @@
 package com.denisanfossi.mareu.di;
 
-import com.denisanfossi.mareu.service.DummyMeetingsApiServiceImpl;
+import com.denisanfossi.mareu.service.DummyMeetingsApiService;
 import com.denisanfossi.mareu.service.MeetingsApiService;
 
 /**
  * Dependency injector to get instances of services
  */
 public class DI {
-    private static MeetingsApiService sMeetingsApiService = new DummyMeetingsApiServiceImpl();
+    private static MeetingsApiService sMeetingsApiService = new DummyMeetingsApiService();
 
     /**
      * get instance of @{@link MeetingsApiService}
@@ -24,7 +24,7 @@ public class DI {
      * @return @{@link MeetingsApiService}
      */
     public static MeetingsApiService getNewInstanceApiService() {
-        sMeetingsApiService = new DummyMeetingsApiServiceImpl();
+        sMeetingsApiService = new DummyMeetingsApiService();
         return sMeetingsApiService;
     }
 }

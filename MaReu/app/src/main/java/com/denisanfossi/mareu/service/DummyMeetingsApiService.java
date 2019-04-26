@@ -1,11 +1,11 @@
 package com.denisanfossi.mareu.service;
 
-import com.denisanfossi.mareu.model.Meeting;
+import com.denisanfossi.mareu.data.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyMeetingsApiServiceImpl implements MeetingsApiService {
+public class DummyMeetingsApiService implements MeetingsApiService {
     private List<Meeting> mMeetingsList = new ArrayList<>();
 
     @Override
