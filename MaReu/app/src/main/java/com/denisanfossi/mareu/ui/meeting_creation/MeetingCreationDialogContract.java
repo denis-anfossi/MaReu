@@ -20,9 +20,9 @@ public interface MeetingCreationDialogContract {
 
     interface Presenter extends BaseMvp.BasePresenter {
 
-        void createMeeting(String topic, String venue);
+        void createMeeting(String topic, String meetingDateTextInput, String venue);
 
-        void setMeetingDate();
+        void setMeetingDate(String meetingDateTextInput);
 
         void saveMeetingDate(int year, int month, int dayOfMonth);
 

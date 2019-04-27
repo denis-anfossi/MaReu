@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.denisanfossi.mareu.data.model.Meeting;
 import com.denisanfossi.mareu.di.DI;
+import com.denisanfossi.mareu.utils.DateUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,14 +25,16 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
     }
 
     @Override
-    public void createMeeting(String topic, String venue) {
+    public void createMeeting(String topic, String meetingDateTextInput, String venue) {
+        mMeetingDate = DateUtils.convertStringToDateForPickersDisplay(meetingDateTextInput);
         Meeting meeting = new Meeting(topic, mMeetingDate, venue);
         DI.getMeetingsApiService().addMeeting(meeting);
         mView.showMeetings();
     }
 
     @Override
-    public void setMeetingDate() {
+    public void setMeetingDate(String meetingDateTextInput) {
+        mMeetingDate = DateUtils.convertStringToDateForPickersDisplay(meetingDateTextInput);
         mCalendar.setTime(mMeetingDate);
         mView.launchDatePickerDialog(mCalendar);
     }

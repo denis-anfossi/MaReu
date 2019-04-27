@@ -1,5 +1,6 @@
 package com.denisanfossi.mareu.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,6 +15,14 @@ public class DateUtils {
 
     public static String convertDateForPickersDisplay(Date date) {
         return DATE_FORMAT_PICKERS_DISPLAY.format(date);
+    }
+
+    public static Date convertStringToDateForPickersDisplay(String input) {
+        try {
+            return DATE_FORMAT_PICKERS_DISPLAY.parse(input);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public static String convertDateForRecyclerDisplay(Date date) {

@@ -32,11 +32,14 @@ public class MeetingsActivity extends AppCompatActivity {
         Meeting meeting;
         meeting = new Meeting("Topic", new Date(), "google");
         meeting.addParticipant("toto@toto.fr");
+        meeting.addParticipant("coucou@coucou.com");
+        meeting.addParticipant("hello@hello.com");
+        meeting.addParticipant("adressemail@adressemail.com");
         mMeetings.addMeeting(meeting);
-        meeting = new Meeting("Topic2", new Date(), "google");
+        meeting = new Meeting("Subject", new Date(), "nexus");
         meeting.addParticipant("toto@toto.fr");
         mMeetings.addMeeting(meeting);
-        meeting = new Meeting("Topic3", new Date(), "google");
+        meeting = new Meeting("Meeting", new Date(), "Nice");
         meeting.addParticipant("toto@toto.fr");
         mMeetings.addMeeting(meeting);
     }

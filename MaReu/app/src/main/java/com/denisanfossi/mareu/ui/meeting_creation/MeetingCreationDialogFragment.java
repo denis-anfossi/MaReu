@@ -32,6 +32,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MeetingCreationDialogFragment extends DialogFragment implements MeetingCreationDialogContract.View {
 
     private static final String TAG = "meetingCreationDialogFragment";
+
     @BindView(R.id.fragment_meeting_creation_dialog_toolbar) Toolbar mToolbar;
     @BindView(R.id.fragment_meeting_creation_topic_text_input) TextInputLayout mTopicTextInputLayout;
     @BindView(R.id.fragment_meeting_creation_venue_text_input) TextInputLayout mVenueTextInputLayout;
@@ -78,7 +79,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
         mToolbar.setNavigationOnClickListener(v -> dismiss());
         mToolbar.inflateMenu(R.menu.meeting_creation_dialog);
         mToolbar.setOnMenuItemClickListener(item -> {
-            mPresenter.createMeeting(mTopicTextInputLayout.getEditText().getText().toString(), mVenueTextInputLayout.getEditText().getText().toString());
+            mPresenter.createMeeting(mTopicTextInputLayout.getEditText().getText().toString(), mDateTextInputEditText.getText().toString(), mVenueTextInputLayout.getEditText().getText().toString());
             return true;
         });
     }

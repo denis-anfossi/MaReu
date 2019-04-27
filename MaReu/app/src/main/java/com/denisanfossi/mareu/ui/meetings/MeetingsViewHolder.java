@@ -33,7 +33,6 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
     }
 
     public void updateWithMeetingData(Meeting meeting) {
-        mMeeting = meeting;
         mTextDate.setText(DateUtils.convertDateForRecyclerDisplay(meeting.getDate()));
         mTextVenue.setText(meeting.getVenue());
         mTextTopic.setText(meeting.getTopic());
