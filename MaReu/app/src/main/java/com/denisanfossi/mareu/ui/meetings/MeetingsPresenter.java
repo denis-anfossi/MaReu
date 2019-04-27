@@ -11,11 +11,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MeetingsPresenter implements MeetingsContract.Presenter {
 
-    private final MeetingsContract.View mMeetingsView;
+    private final MeetingsContract.View mView;
 
-    public MeetingsPresenter(@NonNull MeetingsContract.View meetingsView) {
-        mMeetingsView = checkNotNull(meetingsView);
-        mMeetingsView.setPresenter(this);
+    public MeetingsPresenter(@NonNull MeetingsContract.View view) {
+        mView = checkNotNull(view);
+        mView.setPresenter(this);
     }
 
     @Override
@@ -27,15 +27,15 @@ public class MeetingsPresenter implements MeetingsContract.Presenter {
     public void loadMeetings() {
         List<Meeting> meetings = DI.getMeetingsApiService().getMeetings();
         if (meetings.isEmpty()) {
-            mMeetingsView.showNoMeetings();
+            mView.showNoMeetings();
         } else {
-            mMeetingsView.showMeetings(meetings);
+            mView.showMeetings(meetings);
         }
     }
 
     @Override
     public void createMeeting() {
-
+        mView.launchMeetingCreationDialogFragment();
     }
 
     @Override

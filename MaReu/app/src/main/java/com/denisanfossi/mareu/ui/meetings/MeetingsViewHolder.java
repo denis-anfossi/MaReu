@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.denisanfossi.mareu.R;
 import com.denisanfossi.mareu.data.model.Meeting;
-
-import java.text.SimpleDateFormat;
+import com.denisanfossi.mareu.utils.DateUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,31 +20,27 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
     @BindView(R.id.fragment_meetings_cv_item_venue_text) TextView mTextVenue;
     @BindView(R.id.fragment_meetings_cv_item_topic_text) TextView mTextTopic;
     @BindView(R.id.fragment_meetings_cv_item_delete_btn) ImageButton mDeleteButton;
-    private SimpleDateFormat mSimpleDateFormat;
     private Meeting mMeeting;
 
     public MeetingsViewHolder(@NonNull View itemView, MeetingsAdapter.MeetingsClickListener onClickListener) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        mSimpleDateFormat = new SimpleDateFormat("dd MMMM HH:mm");
 
         itemView.setOnClickListener(this);
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickListener.deleteImageButtonOnClick(v, getLayoutPosition());
-            }
+        mDeleteButton.setOnClickListener(v -> {
+            onClickListener.deleteImageButtonOnClick(v, getLayoutPosition());
         });
     }
 
     public void updateWithMeetingData(Meeting meeting) {
         mMeeting = meeting;
-        mTextDate.setText(mSimpleDateFormat.format(meeting.getDate()));
+        mTextDate.setText(DateUtils.convertDateForRecyclerDisplay(meeting.getDate()));
         mTextVenue.setText(meeting.getVenue());
         mTextTopic.setText(meeting.getTopic());
     }
 
     @Override
     public void onClick(View v) {
+        // TODO
     }
 }

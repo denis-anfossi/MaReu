@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.denisanfossi.mareu.R;
 import com.denisanfossi.mareu.data.model.Meeting;
+import com.denisanfossi.mareu.ui.meeting_creation.MeetingCreationDialogFragment;
+import com.denisanfossi.mareu.ui.meeting_creation.MeetingCreationDialogPresenter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +29,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MeetingsFragment extends Fragment implements MeetingsContract.View {
 
     @BindView(R.id.fragment_meetings_recycler_view) RecyclerView mRecyclerView;
+    private FloatingActionButton mCreateMeetingFloatingActionButton;
+
     private MeetingsContract.Presenter mPresenter;
     private MeetingsAdapter mMeetingsAdapter;
-    private List<Meeting> mMeetings;
 
     public MeetingsFragment() {
     }
@@ -43,12 +47,12 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meetings, container, false);
         ButterKnife.bind(this, view);
 
-        mMeetingsAdapter = new MeetingsAdapter(new ArrayList<Meeting>(), new MeetingsAdapter.MeetingsClickListener() {
+        mMeetingsAdapter = new MeetingsAdapter(new ArrayList<>(), new MeetingsAdapter.MeetingsClickListener() {
             @Override
             public void deleteImageButtonOnClick(View v, int position) {
                 mPresenter.deleteMeeting(position);
@@ -56,6 +60,14 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
         });
         mRecyclerView.setAdapter(mMeetingsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mCreateMeetingFloatingActionButton = getActivity().findViewById(R.id.activity_meetings_add_meeting_fab);
+        mCreateMeetingFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.createMeeting();
+            }
+        });
         return view;
     }
 
@@ -77,7 +89,7 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
 
     @Override
     public void showNoMeetings() {
-        mMeetingsAdapter.updateData(new ArrayList<Meeting>());
+        mMeetingsAdapter.updateData(new ArrayList<>());
     }
 
     @Override
@@ -85,4 +97,9 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
         // TODO
     }
 
+    @Override
+    public void launchMeetingCreationDialogFragment() {
+        MeetingCreationDialogFragment meetingCreationFragment = MeetingCreationDialogFragment.display(getFragmentManager());
+        new MeetingCreationDialogPresenter(meetingCreationFragment);
+    }
 }
