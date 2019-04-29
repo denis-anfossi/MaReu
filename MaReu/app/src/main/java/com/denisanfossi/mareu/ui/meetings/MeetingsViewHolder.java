@@ -73,7 +73,6 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
             mParticipantsText.setVisibility(View.VISIBLE);
             mCollapseButton.setVisibility(View.VISIBLE);
             mExpandButton.setVisibility(View.GONE);
-
         } else {
             mParticipantsText.setVisibility(View.GONE);
             mCollapseButton.setVisibility(View.GONE);

@@ -13,6 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class MeetingsPresenter implements MeetingsContract.Presenter {
 
     private final MeetingsContract.View mView;
+    private List<Meeting> mMeetings;
 
     public MeetingsPresenter(@NonNull MeetingsContract.View view) {
         mView = checkNotNull(view);
@@ -26,12 +27,12 @@ public class MeetingsPresenter implements MeetingsContract.Presenter {
 
     @Override
     public void loadMeetings() {
-        List<Meeting> meetings = DI.getMeetingsApiService().getMeetings();
-        if (meetings.isEmpty()) {
+        mMeetings = DI.getMeetingsApiService().getMeetings();
+        if (mMeetings.isEmpty()) {
             mView.showNoMeetings();
         } else {
-            Collections.sort(meetings);
-            mView.showMeetings(meetings);
+            Collections.sort(mMeetings);
+            mView.showMeetings(mMeetings);
         }
     }
 
@@ -42,9 +43,7 @@ public class MeetingsPresenter implements MeetingsContract.Presenter {
 
     @Override
     public void deleteMeeting(int position) {
-        List<Meeting> meetings = DI.getMeetingsApiService().getMeetings();
-        checkNotNull(meetings);
-        meetings.remove(position);
+        DI.getMeetingsApiService().deleteMeeting(mMeetings.get(position));
         loadMeetings();
     }
 

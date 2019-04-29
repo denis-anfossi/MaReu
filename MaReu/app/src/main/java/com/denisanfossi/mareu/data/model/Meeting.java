@@ -12,10 +12,10 @@ public class Meeting implements Comparable<Meeting> {
 
 
     public Meeting(String topic, Date date, String venue) {
-        this.mTopic = topic;
-        this.mDate = date;
-        this.mVenue = venue;
-        this.mParticipants = new TreeSet<>();
+        setTopic(topic);
+        setDate(date);
+        setVenue(venue);
+        mParticipants = new TreeSet<>();
     }
 
     public String getTopic() {

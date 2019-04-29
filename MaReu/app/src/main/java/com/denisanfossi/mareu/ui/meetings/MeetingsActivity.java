@@ -21,7 +21,7 @@ public class MeetingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meetings);
 
-        mMeetings = DI.getNewInstanceApiService();
+        mMeetings = DI.getNewInstanceMeetingsApiService();
 
         addFakeMeetings();
         configureAndShowMeetingsFragment();
