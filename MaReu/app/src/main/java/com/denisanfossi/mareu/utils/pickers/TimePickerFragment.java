@@ -32,6 +32,12 @@ public class TimePickerFragment extends DialogFragment {
         return new TimePickerFragment();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -13,13 +13,11 @@ import java.util.Calendar;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DatePickerFragment extends DialogFragment {
-
     private static final String TAG = "datePickerFragment";
     private DatePickerDialog.OnDateSetListener mOnDateSetListener;
     private Calendar mCalendar;
 
     public DatePickerFragment() {
-
     }
 
     public static DatePickerFragment display(FragmentManager fragmentManager) {
@@ -30,6 +28,12 @@ public class DatePickerFragment extends DialogFragment {
 
     public static DatePickerFragment newInstance() {
         return new DatePickerFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @NonNull

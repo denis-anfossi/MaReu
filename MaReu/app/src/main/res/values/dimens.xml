@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TextViews -->
+    <!-- Text -->
     <dimen name="size_text_title">24sp</dimen>
     <dimen name="size_text_subtitle">16sp</dimen>
     <dimen name="size_text_description">12sp</dimen>
-    <dimen name="size_text_default_margin">4dp</dimen>
-    <dimen name="size_text_double_margin">8dp</dimen>
-    <dimen name="size_text_default_padding">4dp</dimen>
-    <dimen name="size_text_double_padding">8dp</dimen>
 
-    <!-- ImageViews -->
-    <dimen name="size_img_default_margin">4dp</dimen>
-    <dimen name="size_img_double_margin">8dp</dimen>
-    <dimen name="size_img_default_padding">4dp</dimen>
-    <dimen name="size_img_double_padding">8dp</dimen>
-
-    <!-- Buttons - ImageButtons -->
-    <dimen name="size_btn_default_margin">4dp</dimen>
-    <dimen name="size_btn_double_margin">8dp</dimen>
-    <dimen name="size_btn_default_padding">4dp</dimen>
-    <dimen name="size_btn_double_padding">8dp</dimen>
+    <!-- Padding - Margin -->
+    <dimen name="size_default_pm">4dp</dimen>
+    <dimen name="size_double_pm">8dp</dimen>
 </resources>

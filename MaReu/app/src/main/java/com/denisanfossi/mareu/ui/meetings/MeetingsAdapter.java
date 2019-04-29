@@ -17,11 +17,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsViewHolder> {
 
-    public MeetingsClickListener onClickListener;
+    public MeetingsClickListener mOnClickListener;
     private List<Meeting> mMeetings;
 
     public MeetingsAdapter(List<Meeting> meetings, MeetingsClickListener meetingsClickListener) {
-        onClickListener = meetingsClickListener;
+        mOnClickListener = meetingsClickListener;
         setMeetings(meetings);
     }
 
@@ -32,7 +32,7 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_meetings_item, parent, false);
 
-        return new MeetingsViewHolder(view, onClickListener);
+        return new MeetingsViewHolder(view, mOnClickListener);
     }
 
     @Override
@@ -55,9 +55,7 @@ public class MeetingsAdapter extends RecyclerView.Adapter<MeetingsViewHolder> {
     }
 
     public interface MeetingsClickListener {
-
         void deleteImageButtonOnClick(View v, int position);
-
     }
 
 }

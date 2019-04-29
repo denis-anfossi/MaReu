@@ -40,16 +40,14 @@ public class MeetingsActivity extends AppCompatActivity {
         meeting.addParticipant("toto@toto.fr");
         mMeetings.addMeeting(meeting);
         meeting = new Meeting("Meeting", new Date(), "Nice");
-        meeting.addParticipant("toto@toto.fr");
         mMeetings.addMeeting(meeting);
     }
 
     private void configureAndShowMeetingsFragment() {
 
         mMeetingsFragment = (MeetingsFragment) getSupportFragmentManager().findFragmentById(R.id.activity_meetings);
-
         if (mMeetingsFragment == null) {
-            mMeetingsFragment = new MeetingsFragment();
+            mMeetingsFragment = MeetingsFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.activity_meetings, mMeetingsFragment)
                     .commit();
@@ -58,5 +56,10 @@ public class MeetingsActivity extends AppCompatActivity {
 
     public void updateMeetingsFragments() {
         mMeetingsPresenter.loadMeetings();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

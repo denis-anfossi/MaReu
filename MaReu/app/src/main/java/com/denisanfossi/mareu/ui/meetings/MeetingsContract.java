@@ -12,8 +12,6 @@ public interface MeetingsContract {
 
         void showNoMeetings();
 
-        void showMeetingDetails(Meeting meeting);
-
         void launchMeetingCreationDialogFragment();
     }
 

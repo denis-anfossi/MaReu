@@ -4,6 +4,7 @@ import com.denisanfossi.mareu.BaseMvp;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 public interface MeetingCreationDialogContract {
 
@@ -15,7 +16,19 @@ public interface MeetingCreationDialogContract {
 
         void launchTimePickerDialog(Calendar calendar);
 
-        void updateMeetingCreationDialogFragment(Date meetingDate);
+        void launchAddParticipantsDialog();
+
+        void updateDateMeetingCreationDialogFragment(Date meetingDate);
+
+        void updateParticipantsMeetingCreationDialogFragment(String participants);
+
+        void setErrorTopic();
+
+        void setErrorVenue();
+
+        void setErrorDate();
+
+        void setErrorDateTime();
     }
 
     interface Presenter extends BaseMvp.BasePresenter {
@@ -27,5 +40,9 @@ public interface MeetingCreationDialogContract {
         void saveMeetingDate(int year, int month, int dayOfMonth);
 
         void saveMeetingTime(int hourOfDay, int minute);
+
+        void addParticipants();
+
+        void saveParticipants(Set<String> participants);
     }
 }

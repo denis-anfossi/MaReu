@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fragment_add_participants_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="6dp"
+            android:paddingEnd="16dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_close_24dp"
+            app:title="Add participants"
+            app:titleTextColor="@android:color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fragment_meetings_creation_participants_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fragment_add_participants_text_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_double_pm"
+                    android:layout_toStartOf="@+id/fragment_add_participants_btn"
+                    android:hint="Enter participant mail"
+                    app:helperText="required">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_participant_mail_24dp"
+                        android:drawablePadding="@dimen/size_double_pm"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="35" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/fragment_add_participants_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/fragment_add_participants_text_input"
+                    android:layout_alignBottom="@+id/fragment_add_participants_text_input"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/size_double_pm"
+                    android:layout_marginEnd="@dimen/size_double_pm"
+                    android:layout_marginBottom="@dimen/size_double_pm"
+                    android:background="@null"
+                    android:padding="@dimen/size_double_pm"
+                    android:src="@drawable/ic_check_24dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/fragment_add_participants_list_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fragment_add_participants_text_input"
+                    android:layout_margin="@dimen/size_double_pm"
+                    android:padding="@dimen/size_double_pm"
+                    android:textAppearance="@android:style/TextAppearance.Material"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/size_text_subtitle" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

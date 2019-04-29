@@ -52,22 +52,12 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
         View view = inflater.inflate(R.layout.fragment_meetings, container, false);
         ButterKnife.bind(this, view);
 
-        mMeetingsAdapter = new MeetingsAdapter(new ArrayList<>(), new MeetingsAdapter.MeetingsClickListener() {
-            @Override
-            public void deleteImageButtonOnClick(View v, int position) {
-                mPresenter.deleteMeeting(position);
-            }
-        });
+        mMeetingsAdapter = new MeetingsAdapter(new ArrayList<>(), (v, position) -> mPresenter.deleteMeeting(position));
         mRecyclerView.setAdapter(mMeetingsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mCreateMeetingFloatingActionButton = getActivity().findViewById(R.id.activity_meetings_add_meeting_fab);
-        mCreateMeetingFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.createMeeting();
-            }
-        });
+        mCreateMeetingFloatingActionButton.setOnClickListener(v -> mPresenter.createMeeting());
         return view;
     }
 
@@ -90,11 +80,6 @@ public class MeetingsFragment extends Fragment implements MeetingsContract.View 
     @Override
     public void showNoMeetings() {
         mMeetingsAdapter.updateData(new ArrayList<>());
-    }
-
-    @Override
-    public void showMeetingDetails(Meeting meeting) {
-        // TODO
     }
 
     @Override

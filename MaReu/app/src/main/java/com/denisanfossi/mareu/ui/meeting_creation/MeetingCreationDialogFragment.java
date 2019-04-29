@@ -3,12 +3,16 @@ package com.denisanfossi.mareu.ui.meeting_creation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -17,8 +21,6 @@ import com.denisanfossi.mareu.ui.meetings.MeetingsActivity;
 import com.denisanfossi.mareu.utils.DateUtils;
 import com.denisanfossi.mareu.utils.pickers.DatePickerFragment;
 import com.denisanfossi.mareu.utils.pickers.TimePickerFragment;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
@@ -36,9 +38,10 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
     @BindView(R.id.fragment_meeting_creation_dialog_toolbar) Toolbar mToolbar;
     @BindView(R.id.fragment_meeting_creation_topic_text_input) TextInputLayout mTopicTextInputLayout;
     @BindView(R.id.fragment_meeting_creation_venue_text_input) TextInputLayout mVenueTextInputLayout;
-    @BindView(R.id.fragment_meeting_creation_date_text_input) TextInputLayout mDateTextInputLayout;
-    @BindView(R.id.fragment_meeting_creation_date_input) TextInputEditText mDateTextInputEditText;
-    @BindView(R.id.fragment_meeting_creation_date_btn) MaterialButton mDateButton;
+    @BindView(R.id.fragment_meeting_creation_date_text_input_layout) TextInputLayout mDateTextInputLayout;
+    @BindView(R.id.fragment_meetings_creation_participants_card_view) CardView mParticipantsCardView;
+    @BindView(R.id.fragment_meeting_creation_participants_list_text) TextView mParticipantsListText;
+
     private MeetingCreationDialogContract.Presenter mPresenter;
 
     public MeetingCreationDialogFragment() {
@@ -57,6 +60,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_FullScreenDialog);
     }
 
@@ -65,12 +69,82 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_meeting_creation_dialog, container, false);
         ButterKnife.bind(this, view);
-
-        mDateButton.setOnClickListener(v -> mPresenter.setMeetingDate());
-        mDateTextInputEditText.setOnClickListener(v -> mPresenter.setMeetingDate());
-        mDateTextInputLayout.setOnClickListener(v -> mPresenter.setMeetingDate());
-        mDateTextInputEditText.setText(DateUtils.convertDateForPickersDisplay(new Date()));
+        configureTopicTextInputLayout();
+        configureVenueTextInputLayout();
+        configureDateTextInputLayout();
+        configureParticipantsCardView();
         return view;
+    }
+
+    private void configureTopicTextInputLayout() {
+        mTopicTextInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mTopicTextInputLayout.getEditText().getText().length() > 0) {
+                    mTopicTextInputLayout.setErrorEnabled(false);
+                }
+            }
+        });
+    }
+
+    private void configureVenueTextInputLayout() {
+        mVenueTextInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mVenueTextInputLayout.getEditText().getText().length() > 0) {
+                    mVenueTextInputLayout.setErrorEnabled(false);
+                }
+            }
+        });
+    }
+
+    private void configureDateTextInputLayout() {
+        mDateTextInputLayout.getEditText().setOnClickListener(v -> mPresenter.setMeetingDate(mDateTextInputLayout.getEditText().getText().toString()));
+        mDateTextInputLayout.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                mDateTextInputLayout.setErrorEnabled(false);
+                mPresenter.setMeetingDate(mDateTextInputLayout.getEditText().getText().toString());
+            }
+        });
+        mDateTextInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mDateTextInputLayout.getEditText().getText().length() > 0) {
+                    mDateTextInputLayout.setErrorEnabled(false);
+                }
+            }
+        });
+        mDateTextInputLayout.getEditText().setText(DateUtils.convertDateForPickersDisplay(new Date()));
+    }
+
+    private void configureParticipantsCardView() {
+        mParticipantsCardView.setOnClickListener(v -> mPresenter.addParticipants());
     }
 
     @Override
@@ -79,7 +153,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
         mToolbar.setNavigationOnClickListener(v -> dismiss());
         mToolbar.inflateMenu(R.menu.meeting_creation_dialog);
         mToolbar.setOnMenuItemClickListener(item -> {
-            mPresenter.createMeeting(mTopicTextInputLayout.getEditText().getText().toString(), mDateTextInputEditText.getText().toString(), mVenueTextInputLayout.getEditText().getText().toString());
+            mPresenter.createMeeting(mTopicTextInputLayout.getEditText().getText().toString(), mDateTextInputLayout.getEditText().getText().toString(), mVenueTextInputLayout.getEditText().getText().toString());
             return true;
         });
     }
@@ -121,8 +195,40 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
     }
 
     @Override
-    public void updateMeetingCreationDialogFragment(Date meetingDate) {
-        mDateTextInputEditText.setText(DateUtils.convertDateForPickersDisplay(meetingDate));
+    public void launchAddParticipantsDialog() {
+        AddParticipantsDialogFragment addParticipantsDialogFragment = AddParticipantsDialogFragment.display(getFragmentManager());
+        addParticipantsDialogFragment.setOnParticipantsSetListener(participants -> mPresenter.saveParticipants(participants));
+    }
+
+    @Override
+    public void updateDateMeetingCreationDialogFragment(Date meetingDate) {
+        mDateTextInputLayout.getEditText().setText(DateUtils.convertDateForPickersDisplay(meetingDate));
+    }
+
+    @Override
+    public void updateParticipantsMeetingCreationDialogFragment(String participants) {
+        mParticipantsListText.setText(participants);
+        mParticipantsListText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setErrorTopic() {
+        mTopicTextInputLayout.setError("Should not be empty!");
+    }
+
+    @Override
+    public void setErrorVenue() {
+        mVenueTextInputLayout.setError("Should not be empty!");
+    }
+
+    @Override
+    public void setErrorDate() {
+        mDateTextInputLayout.setError("Should not be empty!");
+    }
+
+    @Override
+    public void setErrorDateTime() {
+        mDateTextInputLayout.setError("Need a valid date & time!");
     }
 
     @Override

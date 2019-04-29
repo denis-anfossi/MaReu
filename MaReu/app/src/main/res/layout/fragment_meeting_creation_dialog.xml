@@ -27,73 +27,103 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.meeting_creation.MeetingCreationFragment">
 
-            <TextView
-                android:id="@+id/fragment_meeting_creation_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Schedule a meeting"
-                android:textSize="@dimen/size_text_title"
-                android:textStyle="bold" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_meeting_creation_topic_text_input"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_meeting_creation_title_text"
+                android:layout_margin="@dimen/size_double_pm"
                 android:hint="Topic"
                 app:helperText="required">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_topic_24dp"
+                    android:drawablePadding="@dimen/size_default_pm"
+                    android:maxLength="35" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_meeting_creation_venue_text_input"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragment_meeting_creation_topic_text_input"
+                android:layout_margin="@dimen/size_double_pm"
                 android:hint="Venue"
                 app:helperText="required">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_venue_24dp"
+                    android:drawablePadding="@dimen/size_default_pm"
+                    android:maxLength="25" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_meeting_creation_date_text_input"
+                android:id="@+id/fragment_meeting_creation_date_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fragment_meeting_creation_venue_text_input"
+                android:layout_margin="@dimen/size_double_pm"
                 android:hint="Meeting Date"
                 app:helperText="required">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_meeting_creation_date_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="datetime" />
+                    android:drawableStart="@drawable/ic_date_time_24dp"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down_24dp"
+                    android:drawablePadding="@dimen/size_default_pm"
+                    android:inputType="datetime"
+                    android:maxLength="14" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/fragment_meeting_creation_date_btn"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/fragment_meetings_creation_participants_card_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/fragment_meeting_creation_date_text_input"
-                android:text="Date" />
+                android:layout_below="@+id/fragment_meeting_creation_date_text_input_layout">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_double_pm"
+                    android:drawableStart="@drawable/ic_group_add_24dp"
+                    android:drawablePadding="@dimen/size_double_pm"
+                    android:padding="@dimen/size_double_pm"
+                    android:text="Add participants"
+                    android:textAppearance="@android:style/TextAppearance.Material"
+                    android:textColor="@color/colorAccent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/fragment_meetings_creation_participants_list_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_meetings_creation_participants_card_view"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:id="@+id/fragment_meeting_creation_participants_list_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size_double_pm"
+                    android:padding="@dimen/size_double_pm"
+                    android:textAppearance="@android:style/TextAppearance.Material"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
-
     </FrameLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
