@@ -43,8 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/size_double_pm"
                     android:layout_toStartOf="@+id/fragment_add_participants_btn"
-                    android:hint="Enter participant mail"
-                    app:helperText="required">
+                    android:hint="Enter participant mail">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

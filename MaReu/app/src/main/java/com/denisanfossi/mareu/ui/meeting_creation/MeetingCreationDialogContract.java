@@ -16,7 +16,7 @@ public interface MeetingCreationDialogContract {
 
         void launchTimePickerDialog(Calendar calendar);
 
-        void launchAddParticipantsDialog();
+        void launchAddParticipantsDialog(Set<String> actualParticipants);
 
         void updateDateMeetingCreationDialogFragment(Date meetingDate);
 

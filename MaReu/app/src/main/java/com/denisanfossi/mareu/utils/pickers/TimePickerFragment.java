@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 
@@ -20,12 +19,6 @@ public class TimePickerFragment extends DialogFragment {
 
     public TimePickerFragment() {
 
-    }
-
-    public static TimePickerFragment display(FragmentManager fragmentManager) {
-        TimePickerFragment timePickerFragment = newInstance();
-        timePickerFragment.show(fragmentManager, TAG);
-        return timePickerFragment;
     }
 
     public static TimePickerFragment newInstance() {
@@ -50,5 +43,9 @@ public class TimePickerFragment extends DialogFragment {
 
     public void setCalendar(Calendar calendar) {
         mCalendar = calendar;
+    }
+
+    public static String getTAG() {
+        return TAG;
     }
 }

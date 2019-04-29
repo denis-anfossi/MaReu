@@ -82,7 +82,7 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
 
     @Override
     public void addParticipants() {
-        mView.launchAddParticipantsDialog();
+        mView.launchAddParticipantsDialog(mParticipants);
     }
 
     @Override

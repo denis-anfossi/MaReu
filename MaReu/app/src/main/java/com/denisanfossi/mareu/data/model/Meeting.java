@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting> {
     private String mTopic;
     private Date mDate;
     private String mVenue;
@@ -48,5 +48,10 @@ public class Meeting {
 
     public void addParticipant(String participant) {
         mParticipants.add(participant);
+    }
+
+    @Override
+    public int compareTo(Meeting m) {
+        return this.getDate().compareTo(m.getDate());
     }
 }

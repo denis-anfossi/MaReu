@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.denisanfossi.mareu.data.model.Meeting;
 import com.denisanfossi.mareu.di.DI;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -29,6 +30,7 @@ public class MeetingsPresenter implements MeetingsContract.Presenter {
         if (meetings.isEmpty()) {
             mView.showNoMeetings();
         } else {
+            Collections.sort(meetings);
             mView.showMeetings(meetings);
         }
     }

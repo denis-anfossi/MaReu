@@ -54,7 +54,6 @@ public class AddParticipantsDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppTheme_FullScreenDialog);
-        mParticipants = new TreeSet<>();
     }
 
     @Override
@@ -63,6 +62,7 @@ public class AddParticipantsDialogFragment extends DialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_add_participants_dialog, container, false);
         ButterKnife.bind(this, view);
+        setParticipantsList();
         configureAddParticipantButton();
         configureAddParticipantText();
         return view;
@@ -132,6 +132,10 @@ public class AddParticipantsDialogFragment extends DialogFragment {
 
     public void setOnParticipantsSetListener(@NonNull OnFragmentInteractionListener onParticipantsSetListener) {
         mOnParticipantsSetListener = checkNotNull(onParticipantsSetListener);
+    }
+
+    public void setParticipants(Set<String> participants) {
+        mParticipants = new TreeSet<>(participants);
     }
 
     public interface OnFragmentInteractionListener {

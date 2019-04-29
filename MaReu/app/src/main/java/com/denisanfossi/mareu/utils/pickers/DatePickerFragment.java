@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 
@@ -20,12 +19,6 @@ public class DatePickerFragment extends DialogFragment {
     public DatePickerFragment() {
     }
 
-    public static DatePickerFragment display(FragmentManager fragmentManager) {
-        DatePickerFragment datePickerFragment = newInstance();
-        datePickerFragment.show(fragmentManager, TAG);
-        return datePickerFragment;
-    }
-
     public static DatePickerFragment newInstance() {
         return new DatePickerFragment();
     }
@@ -36,10 +29,8 @@ public class DatePickerFragment extends DialogFragment {
         setRetainInstance(true);
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new DatePickerDialog(getContext(), mOnDateSetListener, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
+    public static String getTAG() {
+        return TAG;
     }
 
     public void setOnDateSetListener(@NonNull DatePickerDialog.OnDateSetListener onDateSetListener) {
@@ -48,5 +39,13 @@ public class DatePickerFragment extends DialogFragment {
 
     public void setCalendar(Calendar calendar) {
         mCalendar = calendar;
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), mOnDateSetListener, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(mCalendar.getTimeInMillis());
+        return datePickerDialog;
     }
 }

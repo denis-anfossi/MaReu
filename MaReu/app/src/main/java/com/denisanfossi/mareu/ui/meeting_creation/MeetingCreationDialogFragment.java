@@ -25,6 +25,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -182,21 +183,24 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
 
     @Override
     public void launchDatePickerDialog(Calendar calendar) {
-        DatePickerFragment datePickerFragment = DatePickerFragment.display(getFragmentManager());
+        DatePickerFragment datePickerFragment = DatePickerFragment.newInstance();
         datePickerFragment.setCalendar(calendar);
         datePickerFragment.setOnDateSetListener((view, year, monthOfYear, dayOfMonth) -> mPresenter.saveMeetingDate(year, monthOfYear, dayOfMonth));
+        datePickerFragment.show(getFragmentManager(), DatePickerFragment.getTAG());
     }
 
     @Override
     public void launchTimePickerDialog(Calendar calendar) {
-        TimePickerFragment timePickerFragment = TimePickerFragment.display(getFragmentManager());
+        TimePickerFragment timePickerFragment = TimePickerFragment.newInstance();
         timePickerFragment.setCalendar(calendar);
         timePickerFragment.setOnTimeSetListener((view, hourOfDay, minute) -> mPresenter.saveMeetingTime(hourOfDay, minute));
+        timePickerFragment.show(getFragmentManager(), TimePickerFragment.getTAG());
     }
 
     @Override
-    public void launchAddParticipantsDialog() {
+    public void launchAddParticipantsDialog(Set<String> actualParticipants) {
         AddParticipantsDialogFragment addParticipantsDialogFragment = AddParticipantsDialogFragment.display(getFragmentManager());
+        addParticipantsDialogFragment.setParticipants(actualParticipants);
         addParticipantsDialogFragment.setOnParticipantsSetListener(participants -> mPresenter.saveParticipants(participants));
     }
 
