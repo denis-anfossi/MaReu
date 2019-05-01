@@ -15,6 +15,7 @@ public class DatePickerFragment extends DialogFragment {
     private static final String TAG = "datePickerFragment";
     private DatePickerDialog.OnDateSetListener mOnDateSetListener;
     private Calendar mCalendar;
+    private Calendar mMinDate;
 
     public DatePickerFragment() {
     }
@@ -41,11 +42,16 @@ public class DatePickerFragment extends DialogFragment {
         mCalendar = calendar;
     }
 
+    public void setMinDate(Calendar minDate) {
+        mMinDate = minDate;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), mOnDateSetListener, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.getDatePicker().setMinDate(mCalendar.getTimeInMillis());
+        if (mMinDate != null)
+            datePickerDialog.getDatePicker().setMinDate(mMinDate.getTimeInMillis());
         return datePickerDialog;
     }
 }

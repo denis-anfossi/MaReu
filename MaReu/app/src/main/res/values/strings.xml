@@ -9,5 +9,10 @@
     <string name="add_participants_dialog_save_item">save</string>
     <string name="expand_icon">expand icon</string>
     <string name="empty_meeting_participants_list">No participants!</string>
+    <string name="filter_date_or_venue">Filter date or venue</string>
+    <string name="filter_venue">Filter venue</string>
+    <string name="filter_begin_date">Filter begin date</string>
+    <string name="filter_end_date">Filter end date</string>
+    <string name="apply_text">Apply</string>
 
 </resources>

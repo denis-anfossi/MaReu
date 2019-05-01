@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.denisanfossi.mareu.data.model.Meeting;
 import com.denisanfossi.mareu.di.DI;
-import com.denisanfossi.mareu.utils.DateUtils;
+import com.denisanfossi.mareu.utils.DateTimeUtils;
 import com.google.common.base.Joiner;
 
 import java.util.Calendar;
@@ -40,7 +40,7 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
         if (meetingDateTextInput.isEmpty()) {
             isError = true;
             mView.setErrorDate();
-        } else if ((mMeetingDate = DateUtils.convertStringToDateForSave(meetingDateTextInput)) == null) {
+        } else if ((mMeetingDate = DateTimeUtils.convertStringToDateTimeForSave(meetingDateTextInput)) == null) {
             isError = true;
             mView.setErrorDateTime();
         }
@@ -56,17 +56,19 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
 
     @Override
     public void setMeetingDate(String meetingDateTextInput) {
-        mMeetingDate = DateUtils.convertStringToDateForPickersDisplay(meetingDateTextInput);
+        mMeetingDate = DateTimeUtils.convertStringToDateTimeForPickersDisplay(meetingDateTextInput);
         if (mMeetingDate == null) {
             mMeetingDate = new Date();
         }
         mView.updateDateMeetingCreationDialogFragment(mMeetingDate);
         mCalendar.setTime(mMeetingDate);
+        mCalendar.clear(Calendar.MILLISECOND);
         mView.launchDatePickerDialog(mCalendar);
     }
 
     @Override
     public void saveMeetingDate(int year, int monthOfYear, int dayOfMonth) {
+        mCalendar.clear();
         mCalendar.set(year, monthOfYear, dayOfMonth);
         mMeetingDate = mCalendar.getTime();
         mView.updateDateMeetingCreationDialogFragment(mMeetingDate);
@@ -75,6 +77,7 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
 
     @Override
     public void saveMeetingTime(int hourOfDay, int minute) {
+        mCalendar.clear(Calendar.MILLISECOND);
         mCalendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
         mMeetingDate = mCalendar.getTime();
         mView.updateDateMeetingCreationDialogFragment(mMeetingDate);
@@ -98,6 +101,7 @@ public class MeetingCreationDialogPresenter implements MeetingCreationDialogCont
     @Override
     public void start() {
         mCalendar = Calendar.getInstance();
+        mCalendar.clear(Calendar.MILLISECOND);
         mMeetingDate = new Date();
         mParticipants = new TreeSet<>();
     }

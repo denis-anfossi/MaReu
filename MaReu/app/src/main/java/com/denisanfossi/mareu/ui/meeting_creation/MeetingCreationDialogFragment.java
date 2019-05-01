@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.denisanfossi.mareu.R;
 import com.denisanfossi.mareu.ui.meetings.MeetingsActivity;
-import com.denisanfossi.mareu.utils.DateUtils;
+import com.denisanfossi.mareu.utils.DateTimeUtils;
 import com.denisanfossi.mareu.utils.pickers.DatePickerFragment;
 import com.denisanfossi.mareu.utils.pickers.TimePickerFragment;
 import com.google.android.material.textfield.TextInputLayout;
@@ -141,7 +141,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
                 }
             }
         });
-        mDateTextInputLayout.getEditText().setText(DateUtils.convertDateForPickersDisplay(new Date()));
+        mDateTextInputLayout.getEditText().setText(DateTimeUtils.convertDateTimeForPickersDisplay(new Date()));
     }
 
     private void configureParticipantsCardView() {
@@ -185,6 +185,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
     public void launchDatePickerDialog(Calendar calendar) {
         DatePickerFragment datePickerFragment = DatePickerFragment.newInstance();
         datePickerFragment.setCalendar(calendar);
+        datePickerFragment.setMinDate(calendar);
         datePickerFragment.setOnDateSetListener((view, year, monthOfYear, dayOfMonth) -> mPresenter.saveMeetingDate(year, monthOfYear, dayOfMonth));
         datePickerFragment.show(getFragmentManager(), DatePickerFragment.getTAG());
     }
@@ -206,7 +207,7 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
 
     @Override
     public void updateDateMeetingCreationDialogFragment(Date meetingDate) {
-        mDateTextInputLayout.getEditText().setText(DateUtils.convertDateForPickersDisplay(meetingDate));
+        mDateTextInputLayout.getEditText().setText(DateTimeUtils.convertDateTimeForPickersDisplay(meetingDate));
     }
 
     @Override
@@ -217,22 +218,22 @@ public class MeetingCreationDialogFragment extends DialogFragment implements Mee
 
     @Override
     public void setErrorTopic() {
-        mTopicTextInputLayout.setError("Should not be empty!");
+        mTopicTextInputLayout.setError("Should not be empty");
     }
 
     @Override
     public void setErrorVenue() {
-        mVenueTextInputLayout.setError("Should not be empty!");
+        mVenueTextInputLayout.setError("Should not be empty");
     }
 
     @Override
     public void setErrorDate() {
-        mDateTextInputLayout.setError("Should not be empty!");
+        mDateTextInputLayout.setError("Should not be empty");
     }
 
     @Override
     public void setErrorDateTime() {
-        mDateTextInputLayout.setError("Need a valid date & time!");
+        mDateTextInputLayout.setError("Need a valid date & time");
     }
 
     @Override

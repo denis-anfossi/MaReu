@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.denisanfossi.mareu.R;
 import com.denisanfossi.mareu.data.model.Meeting;
-import com.denisanfossi.mareu.utils.DateUtils;
+import com.denisanfossi.mareu.utils.DateTimeUtils;
 import com.google.common.base.Joiner;
 
 import butterknife.BindString;
@@ -38,14 +38,14 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
 
         itemView.setOnClickListener(this);
         mDeleteButton.setOnClickListener(v -> onClickListener.deleteImageButtonOnClick(v, getLayoutPosition()));
-        mExpandButton.setOnClickListener(v -> expandImageButtonClick(v));
-        mCollapseButton.setOnClickListener(v -> collapseImageButtonClick(v));
+        mExpandButton.setOnClickListener(v -> expandOrCollapseMeetingDetails());
+        mCollapseButton.setOnClickListener(v -> expandOrCollapseMeetingDetails());
     }
 
 
     public void updateWithMeetingData(Meeting meeting) {
         mMeeting = meeting;
-        mDateText.setText(DateUtils.convertDateForRecyclerDisplay(meeting.getDate()));
+        mDateText.setText(DateTimeUtils.convertDateForRecyclerDisplay(meeting.getDate()));
         mVenueText.setText(meeting.getVenue());
         mTopicText.setText(meeting.getTopic());
         setParticipantsList();
@@ -60,15 +60,7 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
         }
     }
 
-    private void expandImageButtonClick(View v) {
-        expandOrCollapseMeetingDetails(v);
-    }
-
-    private void collapseImageButtonClick(View v) {
-        expandOrCollapseMeetingDetails(v);
-    }
-
-    private void expandOrCollapseMeetingDetails(View v) {
+    private void expandOrCollapseMeetingDetails() {
         if (mParticipantsText.getVisibility() == View.GONE) {
             mParticipantsText.setVisibility(View.VISIBLE);
             mCollapseButton.setVisibility(View.VISIBLE);
@@ -82,6 +74,6 @@ public class MeetingsViewHolder extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View v) {
-        expandOrCollapseMeetingDetails(v);
+        expandOrCollapseMeetingDetails();
     }
 }

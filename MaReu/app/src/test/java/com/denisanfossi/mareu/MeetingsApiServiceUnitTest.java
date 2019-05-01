@@ -33,6 +33,7 @@ public class MeetingsApiServiceUnitTest {
     public void setup() {
         mMeetingsApiService = DI.getNewInstanceMeetingsApiService();
         Calendar calendar = Calendar.getInstance();
+        calendar.clear();
         calendar.set(2019, 04, 30, 21, 42);
         mMeetingOne = new Meeting("Topic", new Date(calendar.getTimeInMillis()), "Venue");
         mMeetingOne.addParticipant("toto@toto.fr");
