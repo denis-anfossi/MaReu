@@ -115,7 +115,7 @@
                 android:id="@+id/fragment_meetings_card_view_filter_apply_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"
                 android:padding="@dimen/size_double_pm"
                 android:text="@string/apply_text"
                 android:textAlignment="center"
