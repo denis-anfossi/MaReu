@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">MaRéu</string>
 
+    <string name="delete_icon">delete icon</string>
     <string name="venue_icon">venue icon</string>
     <string name="date_icon">date icon</string>
     <string name="meeting_creation_dialog_save_item">save</string>
     <string name="add_participants_dialog_save_item">save</string>
     <string name="expand_icon">expand icon</string>
+    <string name="collapse_icon">collapse icon</string>
     <string name="empty_meeting_participants_list">No participants!</string>
     <string name="filter_date_or_venue">Filter date or venue</string>
     <string name="filter_venue">Filter venue</string>
